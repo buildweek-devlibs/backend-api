@@ -61,7 +61,9 @@ exports.up = knex => {
               .integer('user_id')
               .unsigned()
               .notNullable()
-              .references('users.user_id');
+              .references('users.user_id')
+              .onDelete('CASCADE')
+              .onUpdate('CASCADE');
 
             tb
               .boolean('approved')
@@ -82,7 +84,9 @@ exports.up = knex => {
               .integer('lib_id')
               .unsigned()
               .notNullable()
-              .references('libs.id');
+              .references('libs.id')
+              .onDelete('CASCADE')
+              .onUpdate('CASCADE');
           });
 };
 
