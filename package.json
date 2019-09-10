@@ -4,6 +4,7 @@
   "description": "Lib and Category creation/management system for DevLibs project.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "server": "nodemon index.js",
     "test": "npx knex --env testing migrate:rollback --all && npx knex --env testing migrate:latest && cross-env DB_ENV=testing jest --runInBand --detectOpenHandles --forceExit"
   },
