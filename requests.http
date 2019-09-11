@@ -2,3 +2,28 @@
 
 ###
 GET {{api}}
+
+###
+GET {{api}}/users/1
+
+###
+GET {{api}}/users/1/libs
+
+###
+POST {{api}}/users
+Content-Type: application/json
+
+{
+  "email": "testdummy@gfy.io",
+  "user_id": 1
+}
+
+###
+PUT {{api}}/users/1
+Content-Type: application/json
+
+{
+  "name": "Joe Dummy",
+  "bio": "Another test dummy in the mix...",
+  "birthdate": "2020-04-20"
+}
