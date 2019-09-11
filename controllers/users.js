@@ -120,26 +120,18 @@ exports.rm = async (req, res) => {
 exports.update = async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
-  const { approved } = updates;
 
   try {
     let user = await users.findById(id);
 
     if (user) {
-      if (!user.mod && approved && approved !== user.approved) {
-        res.status(400).json({
-          message: "User can not update approval.",
-          success: false
-        });
-      } else {
-        user = await users.update(id, updates);
+      user = await users.update(id, updates);
 
-        if (user) {
-          res.json({
-            success: true,
-            user
-          });
-        }
+      if (user) {
+        res.json({
+          success: true,
+          user
+        });
       }
     } else {
       res.status(404).json({
