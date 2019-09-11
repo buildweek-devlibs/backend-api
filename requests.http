@@ -1,6 +1,6 @@
 @api = http://localhost:5050
 
-###
+### USERS
 GET {{api}}
 
 ###
@@ -26,4 +26,30 @@ Content-Type: application/json
   "name": "Joe Dummy",
   "bio": "Another test dummy in the mix...",
   "birthdate": "2020-04-20"
+}
+
+### CATEGORIES
+GET {{api}}/categories
+
+###
+GET {{api}}/categories/1
+
+###
+GET {{api}}/categories/1/libs
+
+###
+POST {{api}}/categories
+Content-Type: application/json
+
+{
+  "category": "JavaScript",
+  "approved": true
+}
+
+###
+PUT {{api}}/categories/1
+Content-Type: application/json
+
+{
+  "approved": true
 }

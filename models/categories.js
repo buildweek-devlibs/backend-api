@@ -5,7 +5,8 @@ exports.find = () => db(tb);
 
 exports.findById = id => {
   return db(tb)
-          .where({ id });
+          .where({ id })
+          .first();
 };
 
 exports.libs = category_id => {

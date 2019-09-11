@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const categoriesRouter = require('./categories');
 const usersRouter = require('./users');
 
 router.get('/', (req, res) => {
@@ -9,6 +10,7 @@ router.get('/', (req, res) => {
   `);
 });
 
+router.use('/categories', categoriesRouter);
 router.use('/users', usersRouter);
 
 module.exports = router;
