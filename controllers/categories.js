@@ -123,7 +123,7 @@ exports.rm = async (req, res) => {
 
     if (removed) {
       res.json({
-        message: "Category deleted.",
+        message: "Category removed.",
         success: true
       });
     } else {
