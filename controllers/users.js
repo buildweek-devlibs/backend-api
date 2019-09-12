@@ -91,17 +91,13 @@ exports.rm = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const user = await users.findById(id);
+    const removed = await users.rm(id);
 
-    if (user) {
-      const removed = await users.rm(id);
-
-      if (removed) {
-        res.json({
-          message: "User deleted.",
-          success: true
-        });
-      }
+    if (removed) {
+      res.json({
+        message: "User removed.",
+        success: true
+      });
     } else {
       res.status(404).json({
         message: "User does not exist.",
@@ -122,17 +118,13 @@ exports.update = async (req, res) => {
   const updates = req.body;
 
   try {
-    let user = await users.findById(id);
+    const user = await users.update(id, updates);
 
     if (user) {
-      user = await users.update(id, updates);
-
-      if (user) {
-        res.json({
-          success: true,
-          user
-        });
-      }
+      res.json({
+        success: true,
+        user
+      });
     } else {
       res.status(404).json({
         message: "User does not exist.",
