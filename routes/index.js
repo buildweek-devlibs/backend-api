@@ -3,6 +3,7 @@ const router = require('express').Router();
 const categoriesRouter = require('./categories');
 const libsRouter = require('./libs');
 const usersRouter = require('./users');
+const wordsRouter = require('./words');
 
 router.get('/', (req, res) => {
   res.send(`
@@ -14,5 +15,6 @@ router.get('/', (req, res) => {
 router.use('/categories', categoriesRouter);
 router.use('/libs', libsRouter);
 router.use('/users', usersRouter);
+router.use('/words', wordsRouter);
 
 module.exports = router;

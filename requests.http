@@ -81,3 +81,23 @@ Content-Type: application/json
 {
   "approved": true
 }
+
+### WORDS
+GET {{api}}/words/1
+
+###
+POST {{api}}/words
+Content-Type: application/json
+
+{
+  "lib_id": 1,
+  "type": "Person's Name"
+}
+
+###
+PUT {{api}}/words/1
+Content-Type: application/json
+
+{
+  "word": "Ruby"
+}
