@@ -72,7 +72,7 @@ exports.new = async (req, res) => {
       [ user ] = await users.new(user);
 
       if (user) {
-        res.json({
+        res.status(201).json({
           message: "User saved successfully.",
           success: true
         });
