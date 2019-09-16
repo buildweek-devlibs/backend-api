@@ -1,0 +1,103 @@
+@api = http://localhost:5050
+
+### USERS
+GET {{api}}
+
+###
+GET {{api}}/users/1
+
+###
+GET {{api}}/users/1/libs
+
+###
+POST {{api}}/users
+Content-Type: application/json
+
+{
+  "email": "testdummy@gfy.io",
+  "user_id": 1
+}
+
+###
+PUT {{api}}/users/1
+Content-Type: application/json
+
+{
+  "name": "Joe Dummy",
+  "bio": "Another test dummy in the mix...",
+  "birthdate": "2020-04-20"
+}
+
+### CATEGORIES
+GET {{api}}/categories
+
+###
+GET {{api}}/categories/1
+
+###
+GET {{api}}/categories/1/libs
+
+###
+POST {{api}}/categories
+Content-Type: application/json
+
+{
+  "category": "JavaScript",
+  "approved": true
+}
+
+###
+PUT {{api}}/categories/1
+Content-Type: application/json
+
+{
+  "approved": true
+}
+
+### LIBS
+GET {{api}}/libs
+
+###
+GET {{api}}/libs/1
+
+###
+GET {{api}}/libs/1/words
+
+###
+POST {{api}}/libs
+Content-Type: application/json
+
+{
+  "name": "JavaScript's Bizarre Adventure",
+  "lib": "Heed not the word of %[1]... for it is inferior. Right, %[2].",
+  "category_id": 1,
+  "user_id": 1
+}
+
+###
+PUT {{api}}/libs/1
+Content-Type: application/json
+
+{
+  "approved": true
+}
+
+### WORDS
+GET {{api}}/words/1
+
+###
+POST {{api}}/words
+Content-Type: application/json
+
+{
+  "lib_id": 1,
+  "type": "Person's Name"
+}
+
+###
+PUT {{api}}/words/1
+Content-Type: application/json
+
+{
+  "word": "Ruby"
+}
