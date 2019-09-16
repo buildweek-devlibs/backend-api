@@ -2,26 +2,26 @@ const users = require('../models/users');
 
 exports.one = async (req, res) => {
   const { id } = req.params;
-  
+
   try {
     const user = await users.findById(id);
 
     if (user) {
       res.json({
         success: true,
-        user
+        user,
       });
     } else {
       res.status(404).json({
-        message: "User does not exist.",
-        success: false
+        message: 'User does not exist.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
-      message: "User could not be retrieved.",
-      success: false
+      message: 'User could not be retrieved.',
+      success: false,
     });
   }
 };
@@ -35,19 +35,19 @@ exports.libs = async (req, res) => {
     if (libs.length > 0) {
       res.json({
         libs,
-        success: true
+        success: true,
       });
     } else {
       res.status(404).json({
-        message: "No libs for this user.",
-        success: false
-      })
+        message: 'No libs for this user.',
+        success: false,
+      });
     }
   } catch (error) {
     res.status(500).json({
       error,
       message: "User's libs could not be retrieved.",
-      success: false
+      success: false,
     });
   }
 };
@@ -59,29 +59,32 @@ exports.new = async (req, res) => {
 
   if (!length) {
     res.status(400).json({
-      message: "No info.",
-      success: false
+      message: 'No info.',
+      success: false,
     });
   } else if (!email || !user_id) {
     res.status(400).json({
-      message: "No email or user_id.",
-      success: false
+      message: 'No email or user_id.',
+      success: false,
     });
   } else {
     try {
-      [ user ] = await users.new(user);
+      [user] = await users.new({
+        email: user.email,
+        user_id: user.user_id,
+      });
 
       if (user) {
         res.status(201).json({
-          message: "User saved successfully.",
-          success: true
+          message: 'User saved successfully.',
+          success: true,
         });
       }
     } catch (error) {
       res.status(500).json({
         error,
-        message: "User could not be saved.",
-        success: false
+        message: 'User could not be saved.',
+        success: false,
       });
     }
   }
@@ -95,27 +98,27 @@ exports.rm = async (req, res) => {
 
     if (removed) {
       res.json({
-        message: "User removed.",
-        success: true
+        message: 'User removed.',
+        success: true,
       });
     } else {
       res.status(404).json({
-        message: "User does not exist.",
-        success: false
+        message: 'User does not exist.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
-      message: "User could not be removed.",
-      success: false
+      message: 'User could not be removed.',
+      success: false,
     });
   }
 };
 
 exports.update = async (req, res) => {
   const { id } = req.params;
-  const updates = req.body;
+  const updates = req.body.user;
 
   try {
     const user = await users.update(id, updates);
@@ -123,19 +126,19 @@ exports.update = async (req, res) => {
     if (user) {
       res.json({
         success: true,
-        user
+        user,
       });
     } else {
       res.status(404).json({
-        message: "User does not exist.",
-        success: false
+        message: 'User does not exist.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
-      message: "User could not be modified.",
-      success: false
+      message: 'User could not be modified.',
+      success: false,
     });
   }
 };
