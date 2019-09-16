@@ -4,6 +4,8 @@ const categoriesRouter = require('./categories');
 const libsRouter = require('./libs');
 const usersRouter = require('./users');
 const wordsRouter = require('./words');
+const verifyToken = require('../middleware/verifyToken.js');
+const verifyLogin = require('../middleware/verifyLogin.js');
 
 router.get('/', (req, res) => {
   res.send(`
@@ -12,9 +14,9 @@ router.get('/', (req, res) => {
   `);
 });
 
-router.use('/categories', categoriesRouter);
-router.use('/libs', libsRouter);
-router.use('/users', usersRouter);
-router.use('/words', wordsRouter);
+router.use('/categories', verifyToken, verifyLogin, categoriesRouter);
+router.use('/libs', verifyToken, verifyLogin, libsRouter);
+router.use('/users', verifyToken, verifyLogin, usersRouter);
+router.use('/words', verifyToken, verifyLogin, wordsRouter);
 
 module.exports = router;
