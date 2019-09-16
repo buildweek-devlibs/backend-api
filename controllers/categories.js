@@ -7,19 +7,19 @@ exports.all = async (req, res) => {
     if (list.length > 0) {
       res.json({
         categories: list,
-        success: true
+        success: true,
       });
     } else {
       res.status(404).json({
-        message: "No categories.",
-        success: false
+        message: 'No categories.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
-      message: "Categories could not be retrieved.",
-      success: false
+      message: 'Categories could not be retrieved.',
+      success: false,
     });
   }
 };
@@ -33,19 +33,19 @@ exports.libs = async (req, res) => {
     if (libs.length > 0) {
       res.json({
         libs,
-        success: true
+        success: true,
       });
     } else {
       res.status(404).json({
-        message: "No libs for this category.",
-        success: false
+        message: 'No libs for this category.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
       message: "Category's libs could not be retrieved.",
-      success: false
+      success: false,
     });
   }
 };
@@ -58,32 +58,35 @@ exports.new = async (req, res) => {
   if (approved && approved !== false) {
     cat.approved = false;
   }
-  
+
   if (!length) {
     res.status(400).json({
-      message: "No info.",
-      success: false
+      message: 'No info.',
+      success: false,
     });
   } else if (!category) {
     res.status(400).json({
-      message: "No category field provided.",
-      success: false
+      message: 'No category field provided.',
+      success: false,
     });
   } else {
     try {
-      cat = await categories.new(cat);
+      cat = await categories.new({
+        approved: cat.approved,
+        category: cat.category,
+      });
 
       if (cat) {
         res.status(201).json({
           category: cat,
-          success: true
+          success: true,
         });
       }
     } catch (error) {
       res.status(500).json({
         error,
-        message: "Category could not be saved.",
-        success: false
+        message: 'Category could not be saved.',
+        success: false,
       });
     }
   }
@@ -98,19 +101,19 @@ exports.one = async (req, res) => {
     if (category) {
       res.json({
         category,
-        success: true
+        success: true,
       });
     } else {
       res.status(404).json({
-        message: "Category does not exist.",
-        success: false
+        message: 'Category does not exist.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
-      message: "Category could not be retrieved.",
-      success: false
+      message: 'Category could not be retrieved.',
+      success: false,
     });
   }
 };
@@ -123,33 +126,33 @@ exports.rm = async (req, res) => {
 
     if (removed) {
       res.json({
-        message: "Category removed.",
-        success: true
+        message: 'Category removed.',
+        success: true,
       });
     } else {
       res.status(404).json({
-        message: "Category does not exist.",
-        success: false
+        message: 'Category does not exist.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
-      message: "Category could not be removed.",
-      success: false
+      message: 'Category could not be removed.',
+      success: false,
     });
   }
 };
 
 exports.update = async (req, res) => {
   const { id } = req.params;
-  const updates = req.body;
+  const updates = req.body.update;
   const length = Object.keys(updates).length;
 
   if (!length) {
     res.status(400).json({
-      message: "No info.",
-      success: false
+      message: 'No info.',
+      success: false,
     });
   } else {
     try {
@@ -158,19 +161,19 @@ exports.update = async (req, res) => {
       if (category) {
         res.json({
           category,
-          success: true
+          success: true,
         });
       } else {
         res.status(404).json({
-          message: "Category does not exist.",
-          success: false
+          message: 'Category does not exist.',
+          success: false,
         });
       }
     } catch (error) {
       res.status(500).json({
         error,
-        message: "Category could not be modified.",
-        success: false
+        message: 'Category could not be modified.',
+        success: false,
       });
     }
   }

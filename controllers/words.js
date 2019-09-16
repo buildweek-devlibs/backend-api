@@ -9,19 +9,19 @@ exports.one = async (req, res) => {
     if (word) {
       res.json({
         success: true,
-        word
+        word,
       });
     } else {
       res.status(404).json({
-        message: "Word does not exist.",
-        success: false
+        message: 'Word does not exist.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
-      message: "Word could not be retrieved.",
-      success: false
+      message: 'Word could not be retrieved.',
+      success: false,
     });
   }
 };
@@ -33,29 +33,32 @@ exports.new = async (req, res) => {
 
   if (!length) {
     res.status(400).json({
-      message: "No info.",
-      success: false
+      message: 'No info.',
+      success: false,
     });
   } else if (!lib_id || !type) {
     res.status(400).json({
-      message: "No lib_id or type.",
-      success: false
+      message: 'No lib_id or type.',
+      success: false,
     });
   } else {
     try {
-      word = await words.new(word);
+      word = await words.new({
+        lib_id: word.lib_id,
+        type: word.type,
+      });
 
       if (word) {
         res.status(201).json({
           success: true,
-          word
+          word,
         });
       }
     } catch (error) {
       res.status(500).json({
         error,
-        message: "Word could not be saved.",
-        success: false
+        message: 'Word could not be saved.',
+        success: false,
       });
     }
   }
@@ -69,33 +72,33 @@ exports.rm = async (req, res) => {
 
     if (removed) {
       res.json({
-        messaged: "Word removed.",
-        success: true
+        messaged: 'Word removed.',
+        success: true,
       });
     } else {
       res.status(404).json({
-        message: "Word does not exist.",
-        success: false
+        message: 'Word does not exist.',
+        success: false,
       });
     }
   } catch (error) {
     res.status(500).json({
       error,
-      message: "Word could not be removed.",
-      success: false
+      message: 'Word could not be removed.',
+      success: false,
     });
   }
 };
 
 exports.update = async (req, res) => {
   const { id } = req.params;
-  const updates = req.body;
+  const updates = req.body.update;
   const length = Object.keys(updates).length;
 
   if (!length) {
     res.status(400).json({
-      message: "No info.",
-      success: false
+      message: 'No info.',
+      success: false,
     });
   } else {
     try {
@@ -104,19 +107,19 @@ exports.update = async (req, res) => {
       if (word) {
         res.json({
           success: true,
-          word
+          word,
         });
       } else {
         res.status(404).json({
-          message: "Word does not exist.",
-          success: false
+          message: 'Word does not exist.',
+          success: false,
         });
       }
     } catch (error) {
       res.status(500).json({
         error,
-        message: "Word could not be modified.",
-        success: false
+        message: 'Word could not be modified.',
+        success: false,
       });
     }
   }
